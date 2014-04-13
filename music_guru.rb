@@ -41,6 +41,10 @@ if params[:track] && params[:tc]
 
   elsif !params[:track]
     flash[:notice] = "Wax Off. Must upload a file"
+
+  elsif !params[:tc]
+    flash[:notice] = "We won't submit till you confirm the music will make Mr. Miyagi's ears sing."
+
 end
 
   redirect '/'
