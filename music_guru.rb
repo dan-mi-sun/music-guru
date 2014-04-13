@@ -25,8 +25,8 @@ get '/' do
 end
 
 post '/tracks' do
-
-if params[:track] 
+  puts params[:track]
+if params[:track] && params[:tc]
   
   fingerprint = `ENMFP_codegen/codegen.#{settings.arch} #{params[:track][:tempfile].path} 10 20`
   code = JSON.parse(fingerprint).first["code"]
@@ -34,12 +34,14 @@ if params[:track]
 
   if song.nil?
     flash[:notice] = "Er.. you've got me..."
+  
   else
     flash[:notice] = "Was your song #{song.title} by #{song.artist_name}?"
- 
-  flash[:notice] += "Please check to confirm music of good taste.\n" unless
-      params[:tc]
-  end
+   end
+
+  elsif !params[:track]
+    flash[:notice] = "Wax Off. Must upload a file"
 end
+
   redirect '/'
 end
