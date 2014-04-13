@@ -26,7 +26,7 @@ end
 
 post '/tracks' do
   puts params[:track]
-if params[:track] && params[:tc]
+if params[:track] && params[:tc] && params[:name] > 0
   
   fingerprint = `ENMFP_codegen/codegen.#{settings.arch} #{params[:track][:tempfile].path} 10 20`
   code = JSON.parse(fingerprint).first["code"]
@@ -36,7 +36,7 @@ if params[:track] && params[:tc]
     flash[:notice] = "Er.. you've got me..."
   
   else
-    flash[:notice] = "Was your song #{song.title} by #{song.artist_name}?"
+    flash[:notice] = "#{params[:name]}. Was your song #{song.title} by #{song.artist_name}?"
    end
 
   elsif !params[:track]
@@ -45,7 +45,9 @@ if params[:track] && params[:tc]
   elsif !params[:tc]
     flash[:notice] = "We won't submit till you confirm the music will make Mr. Miyagi's ears sing."
 
-end
+  elsif params[:name].length == 0
+    flash[:notice] = "Don't be a stranger. What's your name?"
+  end
 
   redirect '/'
 end
