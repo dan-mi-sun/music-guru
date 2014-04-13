@@ -25,14 +25,21 @@ get '/' do
 end
 
 post '/tracks' do
+
+if params[:track] 
+  
   fingerprint = `ENMFP_codegen/codegen.#{settings.arch} #{params[:track][:tempfile].path} 10 20`
   code = JSON.parse(fingerprint).first["code"]
   song = Echowrap.song_identify(:code => code)
+
   if song.nil?
     flash[:notice] = "Er.. you've got me..."
   else
     flash[:notice] = "Was your song #{song.title} by #{song.artist_name}?"
+ 
+  flash[:notice] += "Please check to confirm music of good taste.\n" unless
+      params[:tc]
   end
-
+end
   redirect '/'
 end
