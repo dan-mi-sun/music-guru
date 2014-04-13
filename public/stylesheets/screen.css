@@ -1,24 +1,21 @@
 body {
-//  text-align : center;
+  text-align : center;
   font-family: 'Source Code Pro';
-  background: radial-gradient(red, green, blue);
+  background:url('../images/dots.png');
 }
 
 h1 {
   font-size: 32pt;
-  //text-align: center;
+  text-align: center;
   text-transform: uppercase;
-  float: left;
 }
 
 img {
   width: 250px;
-  float: left;
 }
 
 .field {
-  //margin: 20px;
-  float: right;
+  margin: 20px;
 }
 
 .answer {
