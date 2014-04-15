@@ -25,9 +25,9 @@ get '/' do
 end
 
 post '/tracks' do
-  puts params[:track]
-if params[:track] && params[:tc] && params[:name] > 0
-  
+ 
+  if params[:track]
+
   fingerprint = `ENMFP_codegen/codegen.#{settings.arch} #{params[:track][:tempfile].path} 10 20`
   code = JSON.parse(fingerprint).first["code"]
   song = Echowrap.song_identify(:code => code)
@@ -38,8 +38,8 @@ if params[:track] && params[:tc] && params[:name] > 0
   else
     flash[:notice] = "#{params[:name]}. Was your song #{song.title} by #{song.artist_name}?"
    end
-
-  elsif !params[:track]
+  end
+  if !params[:track]
     flash[:notice] = "Wax Off. Must upload a file"
 
   elsif !params[:tc]
