@@ -13,7 +13,7 @@ own first web application to the web by the end of play.
 
 You can find the brief for this project here:
 
-https://github.com/dan-mi-sun/music/blob/master/BRIEF.md
+https://github.com/dan-mi-sun/music-guru/blob/master/BRIEF.md
 
 ### Notes
 http://dan-mi-sun.github.io/wegotcoders/week-0-index-and-setup/
